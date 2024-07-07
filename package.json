@@ -1,0 +1,24 @@
+{
+  "name": "ts-deep-mock",
+  "version": "0.0.1",
+  "repository": "https://github.com/RDO34/branjs.git",
+  "keywords": [
+    "testing",
+    "test",
+    "builder",
+    "mock"
+  ],
+  "files": [
+    "/lib"
+  ],
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  },
+  "scripts": {
+    "test": "npm run test --workspaces",
+    "build": "npm run build --workspaces"
+  }
+}
