@@ -1,6 +1,6 @@
 {
-  "name": "@ts-deep-mock/jest",
-  "version": "0.0.1",
+  "name": "ts-deep-mock-jest",
+  "version": "0.0.4",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "repository": {
@@ -23,10 +23,12 @@
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "jest": "^29.0.0",
+    "ts-deep-mock-core": "0.0.4",
     "ts-jest": "^29.1.5"
   },
   "scripts": {
     "test": "jest",
-    "build": "npx tsc src/index.ts --outDir lib --declaration"
+    "build": "npx tsc src/index.ts --outDir lib --declaration",
+    "prepublishOnly": "cp ../../README.md . && cp ../../LICENSE ."
   }
 }

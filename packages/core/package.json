@@ -1,18 +1,17 @@
 {
-  "name": "ts-deep-mock-vitest",
+  "name": "ts-deep-mock-core",
   "version": "0.0.4",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "repository": {
     "url": "https://github.com/RDO34/ts-deep-mock.git",
-    "directory": "packages/vitest"
+    "directory": "packages/core"
   },
   "keywords": [
     "testing",
     "test",
     "builder",
-    "mock",
-    "vitest"
+    "mock"
   ],
   "files": [
     "/lib"
@@ -20,13 +19,9 @@
   "workspaces": [
     "packages/*"
   ],
-  "devDependencies": {
-    "vitest": "^1.6.0",
-    "ts-deep-mock-core": "0.0.4"
-  },
   "scripts": {
-    "test": "vitest --run",
-    "build": "npx tsc src/index.ts --outDir lib --declaration --moduleResolution bundler --module es2015",
+    "test": ":",
+    "build": "npx tsc src/index.ts --outDir lib --declaration",
     "prepublishOnly": "cp ../../README.md . && cp ../../LICENSE ."
   }
 }

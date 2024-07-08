@@ -1,15 +1,18 @@
 # ts-deep-mock
 
-Generate mocks based on types.
+Automatically generate test mocks based on types.
+
+## About
+
+Inspired by `@fluffy-spoon/substitute` and `jest-mock-extended`, this package aims to reduce boilerplate further for deeply nested structured mocks while making use of existing `jest`/`vitest` interfaces.
 
 Example:
 
 ```ts
-import { createMockBuilder } from "@ts-deep-mock/jest";
-
+// model.ts
 type Services = {
   someService: {
-    someSubService: {
+    someNestedService: {
       doSomething: Function;
       doSomeOtherThing: () => number;
       notAFunction: string;
@@ -17,20 +20,41 @@ type Services = {
   };
 };
 
+// myFunction.ts
 const myFunction = (services: Services) => {
-  services.someService.someSubService.doSomething();
-  services.someService.someSubService.soSomeOtherThing();
+  services.someService.someNestedService.doSomething();
+  services.someService.someNestedService.soSomeOtherThing();
+  return services.someService.someNestedService.notAFunction;
 };
 
-it("should should call some service", () => {
+// test.ts
+import { createMockBuilder } from "ts-deep-mock-jest";
+
+it("should call some service", () => {
   const builder = createMockBuilder<MockType>();
-  const mock = builder.with.someService.someSubService.doSomething
+  const mock = builder.with.someService.someNestedService.doSomething
     .mockReturnValue("some string")
+    .with.someService.someNestedService.notAFunction.as("some value")
     .build();
 
-  myFunction(mock);
+  const result = myFunction(mock);
 
-  expect(mock.someService.someSubService.doSomething()).toBe("some string");
-  expect(mock.someService.someSubService.doSomething).toHaveBeenCalled();
+  expect(result).toBe("some value");
+  expect(mock.someService.someNestedService.doSomething()).toBe("some string");
+  expect(mock.someService.someNestedService.doSomething).toHaveBeenCalled();
 });
+```
+
+## Install
+
+### Jest
+
+```
+npm install --save-dev jest ts-deep-mock-jest
+```
+
+### Vitest
+
+```
+npm install --save-dev vitest ts-deep-mock-vitest
 ```
